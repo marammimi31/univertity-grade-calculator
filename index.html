@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculateur de Moyenne</title>
+</head>
+<body>
+
+<h1>Calculateur de Moyenne Universitaire</h1>
+
+<input type="number" id="note1" placeholder="Note 1">
+<input type="number" id="coef1" placeholder="Coef 1">
+
+<br><br>
+
+<input type="number" id="note2" placeholder="Note 2">
+<input type="number" id="coef2" placeholder="Coef 2">
+
+<br><br>
+
+<button onclick="calculer()">Calculer</button>
+
+<h2 id="resultat"></h2>
+
+<script>
+function calculer() {
+
+let n1 = parseFloat(document.getElementById("note1").value);
+let c1 = parseFloat(document.getElementById("coef1").value);
+
+let n2 = parseFloat(document.getElementById("note2").value);
+let c2 = parseFloat(document.getElementById("coef2").value);
+
+let moyenne = ((n1*c1)+(n2*c2))/(c1+c2);
+
+document.getElementById("resultat").innerText =
+"Moyenne = " + moyenne.toFixed(2);
+
+}
+</script>
+
+</body>
+</html>
