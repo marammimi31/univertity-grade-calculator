@@ -1,43 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Calculateur de Moyenne</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Moyenne Universitaire</title>
+    <style>
+        /* تنسيق الألوان النيون والأرجواني العصري */
+        body {
+            background-color: #0b0b12;
+            color: #e2e2ec;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(20, 20, 35, 0.8);
+            border: 2px solid #bd00ff;
+            box-shadow: 0 0 20px #bd00ff, inset 0 0 10px rgba(189, 0, 255, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px #ff007f, 0 0 20px #ff007f;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            flex: 1;
+            background: #161625;
+            border: 1px solid #ff007f;
+            border-radius: 8px;
+            padding: 12px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px #ff007f;
+        }
+
+        input::placeholder {
+            color: #757593;
+        }
+
+        button {
+            width: 100%;
+            background: linear-gradient(45deg, #bd00ff, #ff007f);
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px #ff007f;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: #161625;
+            border-left: 4px solid #00f0ff;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .result-title {
+            font-size: 14px;
+            color: #00f0ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px #00f0ff;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Calculateur de Moyenne Universitaire</h1>
+    <div class="container">
+        <h1>Calculateur de Moyenne</h1>
+        
+        <div id="marks-container">
+            <div class="input-group">
+                <input type="number" class="note" step="0.01" min="0" max="20" placeholder="Note (Ex: 14.5)">
+                <input type="number" class="coef" step="0.5" min="1" placeholder="Coefficient (Ex: 2)">
+            </div>
+            <div class="input-group">
+                <input type="number" class="note" step="0.01" min="0" max="20" placeholder="Note">
+                <input type="number" class="coef" step="0.5" min="1" placeholder="Coefficient">
+            </div>
+            <div class="input-group">
+                <input type="number" class="note" step="0.01" min="0" max="20" placeholder="Note">
+                <input type="number" class="coef" step="0.5" min="1" placeholder="Coefficient">
+            </div>
+        </div>
 
-<input type="number" id="note1" placeholder="Note 1">
-<input type="number" id="coef1" placeholder="Coef 1">
+        <button onclick="calculerMoyenne()">Calculer la Moyenne</button>
 
-<br><br>
+        <div class="result-box">
+            <div class="result-title">Votre Moyenne Finle</div>
+            <div class="result-value" id="moyenne-display">0.00</div>
+            </div>
+    </div>
 
-<input type="number" id="note2" placeholder="Note 2">
-<input type="number" id="coef2" placeholder="Coef 2">
+    <script>
+        // كود الجافاسكربت الخاص بالحساب الرياضي للمعدل الموزون بالمعاملات
+        function calculerMoyenne() {
+            let notes = document.querySelectorAll('.note');
+            let coefs = document.querySelectorAll('.coef');
+            
+            let totalPoints = 0;
+            let totalCoefs = 0;
 
-<br><br>
+            for (let i = 0; i < notes.length; i++) {
+                let noteValue = parseFloat(notes[i].value);
+                let coefValue = parseFloat(coefs[i].value);
 
-<button onclick="calculer()">Calculer</button>
+                // التأكد من أن الطالب أدخل النقطة والمعامل معاً
+                if (!isNaN(noteValue) && !isNaN(coefValue)) {
+                    totalPoints += noteValue * coefValue;
+                    totalCoefs += coefValue;
+                }
+            }
 
-<h2 id="resultat"></h2>
-
-<script>
-function calculer() {
-
-let n1 = parseFloat(document.getElementById("note1").value);
-let c1 = parseFloat(document.getElementById("coef1").value);
-
-let n2 = parseFloat(document.getElementById("note2").value);
-let c2 = parseFloat(document.getElementById("coef2").value);
-
-let moyenne = ((n1*c1)+(n2*c2))/(c1+c2);
-
-document.getElementById("resultat").innerText =
-"Moyenne = " + moyenne.toFixed(2);
-
-}
-</script>
-
+            let moyenne = totalCoefs > 0 ? (totalPoints / totalCoefs) : 0;
+            
+            // عرض النتيجة بـ رقمين وراء الفاصلة
+            document.getElementById('moyenne-display').innerText = moyenne.toFixed(2);
+        }
+    </script>
 </body>
 </html>
